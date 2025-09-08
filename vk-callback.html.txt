@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VK Auth Callback</title>
+    <script>
+        // Получаем код из URL
+        const urlParams = new URLSearchParams(window.location.hash.substring(1));
+        const accessToken = urlParams.get('access_token');
+        
+        if (accessToken) {
+            // Отправляем токен обратно в основную систему
+            window.opener?.postMessage({
+                type: 'vk_token',
+                token: accessToken
+            }, '*');
+            window.close();
+        }
+    </script>
+</head>
+<body>
+    <p>Processing authentication...</p>
+</body>
+</html>
